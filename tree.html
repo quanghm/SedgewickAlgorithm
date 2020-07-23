@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type='text/javascript'
+	src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+<script type="text/javascript" src="./js/bst.js"></script>
+<script type-"text/javascript" src="./js/evalStr.js"></script>
+<link href="./css/tree.css" rel="stylesheet" />
+</head>
+<body>
+	<input id="string">
+	<button id="compute">=</button>
+	<span id="result"></span>
+	<button id="binary">Create Binary</button>
+	<div id="tree"></div>
+	<script>
+	$("#binary").click(function(evt){
+		evt.preventDefault();
+		
+		var str ="";
+		if ($("#string").val() === "") {
+	        str = "EASYQUESTION";
+	        $("#string").val(str);
+	    } else {
+	        str = $("#string").val();
+	    }
+		
+		var arr = str.toLowerCase().split("");
+		console.log(arr);
+		var tree=buildBST(arr);
+		console.log(tree);
+		var treeDiv=printTree(tree);
+		$("#tree").empty();
+		treeDiv.appendTo($("#tree"));
+		alignTree(treeDiv);
+	})
+	$("#compute").click(function(evt){
+	    evt.preventDefault();
+
+	    var str = "";
+	    if ($("#string").val() === "") {
+	        str = "6*(3-(1*2)/3)/(4-2)";
+	        $("#string").val(str);
+	    } else {
+	        str = $("#string").val();
+	    }
+
+	    str = str.replace(/\s/g, "");
+
+	    var arr = str.match(/[a-z]+|\d+\.?\d*|[\(\)+\-*\/\^]/g);
+	    console.log(arr);
+	    var tree = buildTree(arr);
+
+	    console.log(tree.getDepth());
+
+	    $("#string").val(tree.toString());
+	    $("#tree").empty();
+	    var treeDiv = tree.printTree();
+	    treeDiv.appendTo($("#tree"));
+	    alignTree(treeDiv);
+	    $("#result").html(tree.compute());
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+<script src="./js/supplement.js"></script>
+</head>
+<body>
+<input type="text" id="string"/>
+<button id="eval">Evaluate</button><br>
+<div id="result">here </div>
+<script>
+$("#eval").click(function(){
+	event.preventDefault();
+	$("#result").html(getVal($("#string").val()));
+});
+</script>
+</body>
+</html>
