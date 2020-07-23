@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+</head>
+<body>
+	<input id="function" />
+	<button id="draw">Draw</button>
+	<br />
+	<canvas id="graph"></canvas>
+	<script>
+		$("#draw").click(function() {
+			event.preventDefault();
+
+			var canvas = document.getElementById("graph");
+			var ctx = canvas.getContext("2d");
+			var x = 0;
+
+			// set canvas: 
+			$(canvas).css("border", "1px solid");
+			canvas.width = 400;
+			canvas.height = 400;
+
+			// clear canvas
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+			// draw axes
+			ctx.fillStyle = "black";
+			ctx.beginPath();
+			// x axis
+			var originX = canvas.width / 2;
+			var originY = canvas.height - 30;
+			ctx.moveTo(10, originY);
+			ctx.lineTo(canvas.width - 10, originY);
+
+			// y axis
+			ctx.moveTo(originX, 10);
+			ctx.lineTo(originX, canvas.height - 10);
+
+			ctx.stroke();
+
+			ctx.fillStyle = "green";
+			for (var i = 10; i < canvas.width - 10; i++) {
+				x = i - canvas.width / 2;
+				ctx.fillRect(i - 1, originY - (Math.round(x * x))/100 - 1, 2, 2);
+			}
+
+			// 			ctx.fillStyle = "green";
+			// 			ctx.fillRect(10, 10, 100, 100);
+
+		});
+	</script>
+</body>
+</html>
